@@ -3,20 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>San Andreas Valley Roleplay | SAVRP</title>
+    <title>San Andreas Valley Roleplay | SAVRP FiveM</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Reset and Base Styles */
+        /* Modern Reset & CSS Variables */
+        :root {
+            --bg-main: #0b0b0e;
+            --bg-card: #13131a;
+            --bg-nav: rgba(11, 11, 14, 0.95);
+            --primary: #8a2be2; /* Electric Violet */
+            --secondary: #00d2ff; /* Neon Blue */
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --accent-green: #00ff88;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
         }
 
         body {
-            background-color: #0f0f12;
-            color: #eeeeee;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -24,118 +45,207 @@
             color: inherit;
         }
 
-        /* Navigation */
+        /* Premium Navigation */
         header {
-            background: rgba(15, 15, 18, 0.95);
+            background: var(--bg-nav);
+            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 2px solid #ff4757;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo span {
-            color: #ff4757;
+            color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 20px;
+            gap: 30px;
+            align-items: center;
         }
 
         .nav-links a {
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
             transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .nav-links a:hover {
-            color: #ff4757;
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), #5b11a6);
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: white !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(15, 15, 18, 0.7), rgba(15, 15, 18, 0.9)), 
-                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 90vh;
+            position: relative;
+            background: linear-gradient(rgba(11, 11, 14, 0.6), var(--bg-main)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            padding-top: 80px;
+        }
+
+        .server-status {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .server-status .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            line-height: 1.1;
         }
 
         .hero h1 span {
-            color: #ff4757;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 30px;
-            color: #cccccc;
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin-bottom: 35px;
+            color: var(--text-muted);
+            font-weight: 300;
         }
 
-        .btn {
-            background: #ff4757;
-            color: #fff;
-            padding: 12px 30px;
-            font-weight: bold;
-            border-radius: 5px;
+        .cta-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 14px 35px;
+            font-weight: 600;
+            border-radius: 4px;
             text-transform: uppercase;
-            transition: background 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background 0.3s, border-color 0.3s;
         }
 
-        .btn:hover {
-            background: #ff2e43;
-            transform: translateY(-2px);
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Server Style / vMenu Highlights */
+        .vmenu-banner {
+            background: linear-gradient(90deg, #18122b, #13131a);
+            border-y: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .vmenu-badge {
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         /* Features Section */
         .features {
-            max-width: 1200px;
-            margin: 80px auto;
+            max-width: 1300px;
+            margin: 100px auto;
             padding: 0 20px;
+        }
+
+        .section-header {
             text-align: center;
+            margin-bottom: 60px;
         }
 
-        .section-title {
+        .section-header h2 {
             font-size: 2.5rem;
-            margin-bottom: 40px;
             text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        .section-title span {
-            color: #ff4757;
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
         .grid {
@@ -145,50 +255,120 @@
         }
 
         .card {
-            background: #1a1a24;
-            padding: 40px 20px;
-            border-radius: 8px;
-            border-bottom: 4px solid #333;
-            transition: border-color 0.3s, transform 0.3s;
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
         }
 
         .card:hover {
-            border-color: #ff4757;
             transform: translateY(-5px);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .card .icon-wrapper {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Rules / About Section */
-        .about {
-            background: #14141b;
-            padding: 80px 20px;
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        .about-content {
-            max-width: 800px;
+        /* Departments Section */
+        .departments {
+            background: #0e0e12;
+            padding: 100px 20px;
+        }
+
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1300px;
             margin: 0 auto;
-            text-align: center;
         }
 
-        .about p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #b5b5b5;
+        .dept-card {
+            background: var(--bg-main);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .dept-card:hover {
+            background: var(--bg-card);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .dept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .lspd-ico { color: #1e90ff; }
+        .bcso-ico { color: #eccc68; }
+        .safd-ico { color: #ff4757; }
+        .civ-ico { color: #2ed573; }
+
+        .dept-card h4 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .dept-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
 
         /* Footer */
         footer {
-            background: #09090c;
+            background: #060608;
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
             font-size: 0.9rem;
-            color: #666;
-            border-top: 1px solid #222;
+            color: #525266;
+        }
+
+        .footer-socials {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .footer-socials a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for code brevity */
+            .cta-group { flex-direction: column; width: 100%; max-width: 300px; }
         }
     </style>
 </head>
@@ -197,54 +377,108 @@
     <!-- Header / Navbar -->
     <header>
         <div class="navbar">
-            <div class="logo">SAV<span>RP</span></div>
+            <div class="logo"><i class="fa-solid fa-server"></i> SAV<span>RP</span></div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#">Discord</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Server Features</a></li>
+                <li><a href="#departments">Departments</a></li>
+                <li><a href="https://discord.gg/yourlink" target="_blank" class="nav-btn"><i class="fa-brands fa-discord"></i> Connect</a></li>
             </ul>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>San Andreas <span>Valley</span> RP</h1>
-        <p>Welcome to the ultimate roleplay experience. Choose your path, build your empire, and write your own story in a living, breathing world.</p>
-        <a href="https://discord.gg/yourlink" target="_blank" class="btn">Join Our Discord</a>
+        <div class="server-status">
+            <div class="pulse"></div> Server Online | Join the Valley
+        </div>
+        <h1>San Andreas <br><span>Valley</span> Roleplay</h1>
+        <p>A premium, high-performance FiveM community focusing on streamlined vMenu gameplay. Spawn, customize, and jump straight into elite roleplay scenarios.</p>
+        
+        <div class="cta-group">
+            <a href="fivem://connect/your-server-ip" class="nav-btn" style="padding: 14px 35px; font-size: 1rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-play"></i> Direct Connect
+            </a>
+            <a href="#features" class="btn-secondary">Explore Features</a>
+        </div>
     </section>
+
+    <!-- vMenu Special Banner -->
+    <div class="vmenu-banner">
+        <span class="vmenu-badge">Server Style: vMenu</span>
+        <p style="margin-top: 10px; color: var(--text-muted); font-size: 1rem;">No tedious grinding required. Utilize our optimized vMenu configuration to tell your story, your way.</p>
+    </div>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <h2 class="section-title">Why Choose <span>SAVRP</span>?</h2>
+        <div class="section-header">
+            <h2>Built For Quality Roleplay</h2>
+            <p>Why San Andreas Valley is the premier vMenu home for FiveM enthusiasts.</p>
+        </div>
+        
         <div class="grid">
             <div class="card">
-                <h3>Custom Economy</h3>
-                <p>Earn cash with unique civilian jobs, or build a criminal enterprise. The market adapts to your actions.</p>
+                <div class="icon-wrapper"><i class="fa-solid fa-sliders"></i></div>
+                <h3>Optimized vMenu</h3>
+                <p>Perfectly synchronized permissions ensuring balanced gameplay. Easily customize characters, spawn assets, and manage scenarios without UI lag.</p>
             </div>
             <div class="card">
-                <h3>Active Whitelisted Jobs</h3>
-                <p>Apply for LSPD, EMS, or Mechanics. Our departments feature structured ranking and high-quality equipment.</p>
+                <div class="icon-wrapper"><i class="fa-solid fa-car"></i></div>
+                <h3>Custom Fleet & Assets</h3>
+                <p>Featuring hand-picked, custom-optimized add-on vehicles, custom civilian clothing, MLO maps, and realistic handling files.</p>
             </div>
             <div class="card">
-                <h3>Serious Roleplay</h3>
-                <p>An immersive environment with dedicated staff keeping the quality of roleplay at its absolute highest.</p>
+                <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Active Administration</h3>
+                <p>A professional staff team dedicated to keeping the environment toxic-free, immersion-first, and consistently active.</p>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-content">
-            <h2 class="section-title">About Our <span>Community</span></h2>
-            <p>San Andreas Valley Roleplay was built by players, for players. We focus on providing a stable server environment with optimized custom scripts, custom vehicles, and endless opportunities for character progression.</p>
-            <p>Whether you want to enforce the law, rule the streets, or run a legitimate business, there is a place for you in the Valley.</p>
+    <!-- Departments Section -->
+    <section class="departments" id="departments">
+        <div class="section-header">
+            <h2>Join Our <span>Departments</span></h2>
+            <p>Professional agencies actively looking for dedicated personnel.</p>
+        </div>
+
+        <div class="dept-grid">
+            <div class="dept-card">
+                <div class="dept-icon lspd-ico"><i class="fa-solid fa-building-shield"></i></div>
+                <h4>LSPD</h4>
+                <p>Los Santos Police Department. Tactical urban response and citywide traffic enforcement.</p>
+                <span style="color: var(--secondary); font-size: 0.85rem; font-weight: bold;">Hiring Now</span>
+            </div>
+            <div class="dept-card">
+                <div class="dept-icon bcso-ico"><i class="fa-solid fa-star"></i></div>
+                <h4>BCSO</h4>
+                <p>Blaine County Sheriff's Office. Rural highway safety and wild country patrol.</p>
+                <span style="color: var(--secondary); font-size: 0.85rem; font-weight: bold;">Hiring Now</span>
+            </div>
+            <div class="dept-card">
+                <div class="dept-icon safd-ico"><i class="fa-solid fa-truck-medical"></i></div>
+                <h4>SA Fire & EMS</h4>
+                <p>San Andreas Fire Department. Critical care, heavy rescue, and medical response.</p>
+                <span style="color: var(--secondary); font-size: 0.85rem; font-weight: bold;">Hiring Now</span>
+            </div>
+            <div class="dept-card">
+                <div class="dept-icon civ-ico"><i class="fa-solid fa-users"></i></div>
+                <h4>Civilian Network</h4>
+                <p>The lifeblood of the valley. Create businesses, run organizations, or cause chaos.</p>
+                <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: bold;">Instant Access</span>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 San Andreas Valley Roleplay. All rights reserved. This community is not affiliated with Rockstar Games.</p>
+        <div class="footer-socials">
+            <a href="https://discord.gg/yourlink" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2026 San Andreas Valley Roleplay. All rights reserved.</p>
+        <p style="font-size: 0.75rem; margin-top: 10px;">This community is a fan-made modification and is not affiliated with or endorsed by Rockstar Games or Take-Two Interactive.</p>
     </footer>
 
 </body>
